@@ -55,6 +55,7 @@ class LibraryBookAssociationMockMvcTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun `one-to-many association library-books test`() {
         val book1MockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/books")
                 .content(hummingBirdLife2017).contentType(MediaType.APPLICATION_JSON))
