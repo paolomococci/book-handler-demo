@@ -55,6 +55,7 @@ class AuthorsBooksAssociationMockMvcTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun `many-to-many association authors-books test`() {
         val authorMockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/authors")
                 .content(jeremy78).contentType(MediaType.APPLICATION_JSON))
