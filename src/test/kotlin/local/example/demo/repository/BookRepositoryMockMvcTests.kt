@@ -46,25 +46,25 @@ class BookRepositoryMockMvcTests {
     @Autowired
     private val bookRepository: BookRepository? = null
 
-    @Before fun `initialize`() {
+    @Before fun initialize() {
         bookRepository?.deleteAll()
     }
 
-    @Test fun `verify existence`() {
+    @Test @Throws(Exception::class) fun `verify existence`() {
         mockMvc!!.perform(MockMvcRequestBuilders.get("/books"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.books").exists())
     }
 
-    @Test fun `create test`() {
+    @Test @Throws(Exception::class) fun `create test`() {
         mockMvc!!.perform(MockMvcRequestBuilders.post("/books")
                 .content(hummingBirdLife2017).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
                 .andExpect(MockMvcResultMatchers.header().string("Location", Matchers.containsString("books")))
     }
 
-    @Test fun `retrieve test`() {
+    @Test @Throws(Exception::class) fun `retrieve test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/books")
                 .content(hummingBirdLife2017).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
@@ -75,7 +75,7 @@ class BookRepositoryMockMvcTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Humming-Bird Life 2017"))
     }
 
-    @Test fun `delete test`() {
+    @Test @Throws(Exception::class) fun `delete test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/books")
                 .content(hummingBirdLife2017).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
