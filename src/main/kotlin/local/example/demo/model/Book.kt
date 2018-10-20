@@ -24,7 +24,7 @@ import javax.persistence.*
 @Entity
 class Book {
     @Id @GeneratedValue val id: Long = 0
-    @NaturalId @Column(nullable = false) var title: String = ""
+    @NaturalId @Column(nullable = false) val title: String = "default" + Date().time.toString()
     @ManyToOne @JoinColumn(name = "library_id") var library: Library? = null
     @ManyToMany(targetEntity = Author::class, mappedBy = "books", fetch = FetchType.LAZY)
     var authors: List<Author>? = null
