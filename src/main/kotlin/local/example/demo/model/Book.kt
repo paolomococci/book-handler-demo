@@ -19,6 +19,7 @@
 package local.example.demo.model
 
 import org.hibernate.annotations.NaturalId
+import java.util.Date
 import javax.persistence.*
 
 @Entity
