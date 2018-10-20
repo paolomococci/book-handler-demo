@@ -25,7 +25,7 @@ import javax.persistence.*
 @Entity
 class Library {
     @Id @GeneratedValue val id: Long = 0
-    @NaturalId @Column(nullable = false) var name: String = ""
+    @NaturalId @Column(nullable = false) val name: String = "default" + Date().time.toString()
     @OneToOne @JoinColumn(name = "address_id")
     @RestResource(path = "libraryAddress", rel = "address") var address: Address? = null
     @OneToMany(mappedBy = "library") var books: List<Book>? = null
