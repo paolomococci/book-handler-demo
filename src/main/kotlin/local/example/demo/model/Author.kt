@@ -24,7 +24,7 @@ import javax.persistence.*
 @Entity
 class Author {
     @Id @GeneratedValue val id: Long = 0
-    @NaturalId @Column(nullable = false) var nickname: String = ""
+    @NaturalId @Column(nullable = false) val nickname: String = "default" + Date().time.toString()
     @ManyToMany(targetEntity = Book::class, cascade = [CascadeType.ALL])
     @JoinTable(name = "book_author",
             joinColumns = [JoinColumn(name = "book_id", referencedColumnName = "id")],
