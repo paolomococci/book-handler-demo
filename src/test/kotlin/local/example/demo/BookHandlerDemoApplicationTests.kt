@@ -27,6 +27,5 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest(classes = [BookHandlerDemoApplication::class])
 class BookHandlerDemoApplicationTests {
 
-	@Test
-	fun `context loads`() {}
+	@Test @Throws(Exception::class) fun `context loads`() {}
 }
