@@ -24,7 +24,7 @@ import javax.persistence.*
 @Entity
 class Address {
     @Id @GeneratedValue val id: Long = 0
-    @NaturalId @Column(nullable = false) var location: String = ""
+    @NaturalId @Column(nullable = false) val location: String = "default" + Date().time.toString()
     @OneToOne(mappedBy = "address") var library: Library? = null
     constructor()
 }
