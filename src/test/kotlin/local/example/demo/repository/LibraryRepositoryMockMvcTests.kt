@@ -46,25 +46,25 @@ class LibraryRepositoryMockMvcTests {
     @Autowired
     private val libraryRepository: LibraryRepository? = null
 
-    @Before fun `initialize`() {
+    @Before fun initialize() {
         libraryRepository?.deleteAll()
     }
 
-    @Test fun `verify existence`() {
+    @Test @Throws(Exception::class) fun `verify existence`() {
         mockMvc!!.perform(MockMvcRequestBuilders.get("/libraries"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.libraries").exists())
     }
 
-    @Test fun `create test`() {
+    @Test @Throws(Exception::class) fun `create test`() {
         mockMvc!!.perform(MockMvcRequestBuilders.post("/libraries")
                 .content(central55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
                 .andExpect(MockMvcResultMatchers.header().string("Location", Matchers.containsString("libraries")))
     }
 
-    @Test fun `retrieve test`() {
+    @Test @Throws(Exception::class) fun `retrieve test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/libraries")
                 .content(central55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
@@ -75,7 +75,7 @@ class LibraryRepositoryMockMvcTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Civic 55 Library"))
     }
 
-    @Test fun `delete test`() {
+    @Test @Throws(Exception::class) fun `delete test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/libraries")
                 .content(central55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
