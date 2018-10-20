@@ -20,6 +20,7 @@ package local.example.demo.model
 
 import org.hibernate.annotations.NaturalId
 import org.springframework.data.rest.core.annotation.RestResource
+import java.util.Date
 import javax.persistence.*
 
 @Entity
