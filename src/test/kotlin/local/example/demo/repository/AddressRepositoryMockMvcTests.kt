@@ -46,25 +46,25 @@ class AddressRepositoryMockMvcTests {
     @Autowired
     private val addressRepository: AddressRepository? = null
 
-    @Before fun `initialize`() {
+    @Before fun initialize() {
         addressRepository?.deleteAll()
     }
 
-    @Test fun `verify existence`() {
+    @Test @Throws(Exception::class) fun `verify existence`() {
         mockMvc!!.perform(MockMvcRequestBuilders.get("/addresses"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.addresses").exists())
     }
 
-    @Test fun `create test`() {
+    @Test @Throws(Exception::class) fun `create test`() {
         mockMvc!!.perform(MockMvcRequestBuilders.post("/addresses")
                 .content(address55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
                 .andExpect(MockMvcResultMatchers.header().string("Location", Matchers.containsString("addresses")))
     }
 
-    @Test fun `retrieve test`() {
+    @Test @Throws(Exception::class) fun `retrieve test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/addresses")
                 .content(address55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
@@ -75,7 +75,7 @@ class AddressRepositoryMockMvcTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.location").value("NewCity Central Avenue 55"))
     }
 
-    @Test fun `delete test`() {
+    @Test @Throws(Exception::class) fun `delete test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/addresses")
                 .content(address55).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
