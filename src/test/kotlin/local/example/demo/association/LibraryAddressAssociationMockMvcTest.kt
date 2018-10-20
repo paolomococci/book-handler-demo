@@ -55,6 +55,7 @@ class LibraryAddressAssociationMockMvcTest {
     }
 
     @Test
+    @Throws(Exception::class)
     fun `one-to-one association library-address test`() {
         val addressMockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/addresses")
                 .content(address55).contentType(MediaType.APPLICATION_JSON))
