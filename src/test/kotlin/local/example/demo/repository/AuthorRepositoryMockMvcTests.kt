@@ -46,25 +46,25 @@ class AuthorRepositoryMockMvcTests {
     @Autowired
     private val authorRepository: AuthorRepository? = null
 
-    @Before fun `initialize`() {
+    @Before fun initialize() {
         authorRepository?.deleteAll()
     }
 
-    @Test fun `verify existence`() {
+    @Test @Throws(Exception::class) fun `verify existence`() {
         mockMvc!!.perform(MockMvcRequestBuilders.get("/authors"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.jsonPath("$._embedded.authors").exists())
     }
 
-    @Test fun `create test`() {
+    @Test @Throws(Exception::class) fun `create test`() {
         mockMvc!!.perform(MockMvcRequestBuilders.post("/authors")
                 .content(jeremy78).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
                 .andExpect(MockMvcResultMatchers.header().string("Location", Matchers.containsString("authors")))
     }
 
-    @Test fun `retrieve test`() {
+    @Test @Throws(Exception::class) fun `retrieve test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/authors")
                 .content(jeremy78).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
@@ -75,7 +75,7 @@ class AuthorRepositoryMockMvcTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.nickname").value("jeremy78"))
     }
 
-    @Test fun `delete test`() {
+    @Test @Throws(Exception::class) fun `delete test`() {
         val mockMvcResult = mockMvc!!.perform(MockMvcRequestBuilders.post("/authors")
                 .content(jeremy78).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated)
