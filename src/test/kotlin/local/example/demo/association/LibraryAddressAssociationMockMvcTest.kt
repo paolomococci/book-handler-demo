@@ -49,7 +49,7 @@ class LibraryAddressAssociationMockMvcTest {
     @Autowired val addressRepository: AddressRepository? = null
 
     @Before
-    fun `initialize`() {
+    fun initialize() {
         libraryRepository?.deleteAll()
         addressRepository?.deleteAll()
     }
