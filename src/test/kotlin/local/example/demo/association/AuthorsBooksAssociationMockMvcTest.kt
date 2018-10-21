@@ -49,7 +49,7 @@ class AuthorsBooksAssociationMockMvcTest {
     @Autowired val bookRepository: BookRepository? = null
 
     @Before
-    fun `initialize`() {
+    fun initialize() {
         authorRepository?.deleteAll()
         bookRepository?.deleteAll()
     }
